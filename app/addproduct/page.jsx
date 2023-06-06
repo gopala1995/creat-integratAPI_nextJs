@@ -12,7 +12,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const Form = styled(FormGroup)`
   width: 50%;
@@ -34,14 +34,24 @@ const AddProduct = () => {
     const { title, price, image, description } = inpval;
 
     if (title == "") {
-      toast.error("Title is Required");
+      toast.error("Title is Required", {
+        position: toast.POSITION.TOP_CENTER,
+      });
     } else if (price === "") {
-      toast.error("Price is Required.");
+      toast.error("Price is Required.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else if (description === "") {
+      toast.error("description is Required.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
     } else if (image === "") {
-      toast.error("image is Required");
+      toast.error("image is Required", {
+        position: toast.POSITION.TOP_CENTER,
+      });
     } else {
       await axios.post("http://localhost:3004/products", inpval).then((res) => {
-        console.log("dataaaaa", res);
+        // console.log("dataaaaa", res);
         if (res) {
           setInpval({
             title: "",
@@ -49,9 +59,13 @@ const AddProduct = () => {
             description: "",
             image: "",
           });
-          toast.success("successfully added");
+          toast.success("successfully added", {
+            position: toast.POSITION.TOP_CENTER,
+          });
         } else {
-          toast.error(" Failed");
+          toast.error(" Failed", {
+            position: toast.POSITION.TOP_CENTER,
+          });
         }
       });
     }
