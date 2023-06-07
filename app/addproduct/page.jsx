@@ -23,6 +23,7 @@ const Form = styled(FormGroup)`
 `;
 
 const AddProduct = () => {
+  const router = useRouter();
   const [inpval, setInpval] = useState({
     title: "",
     price: "",
@@ -51,7 +52,7 @@ const AddProduct = () => {
       });
     } else {
       await axios.post("http://localhost:3004/products", inpval).then((res) => {
-        // console.log("dataaaaa", res);
+        console.log("dataaaaa", res);
         if (res) {
           setInpval({
             title: "",
@@ -59,6 +60,9 @@ const AddProduct = () => {
             description: "",
             image: "",
           });
+          setTimeout(() => {
+            router.push("/");
+          }, 1300);
           toast.success("successfully added", {
             position: toast.POSITION.TOP_CENTER,
           });
